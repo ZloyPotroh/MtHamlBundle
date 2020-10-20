@@ -1,18 +1,21 @@
 sudo: false
 language: php
 php:
-  - 5.3
   - 5.6
-  - 7
+  - 7.2
+  - 7.3
 env:
-  - SYMFONY_VERSION="2.3.*"
   - SYMFONY_VERSION="2.8.*"
-  - SYMFONY_VERSION="3.0.*"
+  - SYMFONY_VERSION="3.4.*"
 matrix:
   exclude:
-    - php: 5.3
-      env: SYMFONY_VERSION="3.0.*"
+    - php: 5.6
+      env: SYMFONY_VERSION="3.4.*"
+    - php: 7.2
+      env: SYMFONY_VERSION="2.8.*"
+    - php: 7.3
+      env: SYMFONY_VERSION="2.8.*"
 
 before_script:
-  - echo "memory_limit=2G" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
+  - echo "memory_limit=-1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
   - composer require --dev --no-interaction symfony/symfony:${SYMFONY_VERSION}
